@@ -65,3 +65,4 @@ while counter: #Sin condicionantes, mientras el numero sea diferente de 0, TRUE,
     print (counter)
     counter -= 1
 print ("outside the loop")
+
