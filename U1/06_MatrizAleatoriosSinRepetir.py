@@ -7,10 +7,9 @@ j = 0
 while i < N:
     while j <N:
         n = randrange(1,(N**2)+1)
-        if n != lista[i-j][i]:
-            if n != lista [i][i-j]:
-                lista[i][j] = n
-                j+=1
+        if n not in lista:
+            lista[i][j] = n
+            j+=1
     j = 0
     i=i+1
 
