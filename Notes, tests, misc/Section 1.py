@@ -6,7 +6,7 @@ print ('WOrld '*2)
 #funciones se manejan por posicion, nombre o combinado. Para manejar combinado primero se necesita poner los de posicion (ej. 
 #"Hola") antes de los nombres (ej. "end, sep")
 '''
-COMENTARIOS A FORMA DE BLOQUE PA PA PA PA PA YA LLEGO EL DED
+COMENTARIOS A FORMA DE BLOQUE
 '''
 print ('Greg\'s Book')#\' Hace que se imprima la comilla y no se confunda el print 
 print ("Greg\'s Book")
