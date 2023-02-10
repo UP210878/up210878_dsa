@@ -1,4 +1,5 @@
 import operator
+
 # Make a calculator, buttons to display.
 # 9 = Maneja parentesis, potencia, multiplicacion, division, suma, resta
 # 10 = Funciones (log,ln, sen, cos, acos...)
@@ -18,6 +19,9 @@ import operator
 #operacion = str(input("Ingrese la operacion"))
 
 operators = ["+","-","/","^","*"] #Operadores
+parenthesis_start = ['(','[','{',]
+parenthesis_finish = [')',']','}'] # Parentesis
+
 ops = {
     "+": operator.add,#Funcion suma
     "-": operator.sub,#Resta
@@ -43,7 +47,52 @@ def OperacionPostfix(P): # Operaciones posfix
             print("Invalid output, exiting")
             break
         i = i+1
-    print (Stack.pop())
+    return (Stack.pop())
 
-P = ["5","6","2","+","*","12","4","/","-"]
-OperacionPostfix(P)
+def Infix():
+    operacion = str(input("Ingrese la operacion con espacios entre cada numero/simbolo: "))
+    a = operacion.split()
+    return a
+
+def Priority(P):
+    P = list(P)
+    if P in ['+','-']:
+        return 1
+
+
+
+def InfixtoPostfix(Infix):
+    Infix = list(Infix)
+    Postfix=[]
+    Ops_Stack=[]
+    for i in range(0,int(len(Infix))):
+        if Infix[i] in operators:
+            Ops_Stack.append((Infix[i]))
+        elif Infix[i] in parenthesis_finish:
+            for i in range(0,int(len(Ops_Stack))):
+                A = Ops_Stack.pop()
+                Postfix.append(A)
+        elif Infix[i] in parenthesis_start:
+            print()
+        elif Infix[i] not in operators:
+            Postfix.append(Infix[i])
+    for i in range(0,int(len(Ops_Stack))):
+            A = Ops_Stack.pop()
+            Postfix.append(A)
+    return Postfix
+
+# Prioridad
+# 1) + -
+# 2) * /
+# 3) ^
+# 4) ( )
+
+
+a = Infix()
+print ("Infix: ", a)
+
+P = InfixtoPostfix(a)
+print ("Posfix: ", P)
+#P = ["5","6","2","+","*","12","4","/","-"]
+Resultado = OperacionPostfix(P)
+print ("Resultado: ", Resultado)
