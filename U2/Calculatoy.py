@@ -18,7 +18,7 @@ import operator
 
 #operacion = str(input("Ingrese la operacion"))
 
-operators = ["+","-","/","^","*"] #Operadores
+operators = ["+","-","*","/","^"] #Operadores
 parenthesis_start = ['(','[','{',]
 parenthesis_finish = [')',']','}'] # Parentesis
 
@@ -81,6 +81,15 @@ def InfixtoPostfix(Infix):
             Postfix.append(A)
     return Postfix
 
+def Prio(lista):
+    lista = list(lista)
+    for i in range(0,int(len(lista))):
+        if lista[i] in operators:
+            print (lista[i], " = ", operators.index(lista[i]))
+            # return operators.index(lista[i])
+        else:
+            print()
+
 # Prioridad
 # 1) + -
 # 2) * /
@@ -93,6 +102,11 @@ print ("Infix: ", a)
 
 P = InfixtoPostfix(a)
 print ("Posfix: ", P)
+
 #P = ["5","6","2","+","*","12","4","/","-"]
+print(P)
+
+Prioridad = Prio(P)
+
 Resultado = OperacionPostfix(P)
 print ("Resultado: ", Resultado)
