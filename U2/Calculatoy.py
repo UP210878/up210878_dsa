@@ -1,5 +1,6 @@
-from math import ceil
+import math
 import operator
+#import tkinter
 
 # Make a calculator, buttons to display.
 # 9 = Maneja parentesis, potencia, multiplicacion, division, suma, resta
@@ -19,7 +20,9 @@ import operator
 
 #operacion = str(input("Ingrese la operacion"))
 
-operators = ["+","-","*","/","^","^"] #Operadores
+operators = ["+","-","*","/","^"] #Operadores
+fn = ["sen", "cos", "tan", "cot", "sec", "csc","log","ln","aln","sin","alog"]
+buttons=["1","2","3","4","5","6","7","8","9","+","-","*","/","^","sen","cos","tan","cot","sec","csc","(",")"]
 #parenthesis_start = ['(','[','{',]
 #parenthesis_finish = [')',']','}'] # Parentesis
 
@@ -28,7 +31,17 @@ ops = {
     "-": operator.sub,#Resta
     "*":operator.mul,#Multiplicacion
     "/":operator.truediv,#Division
-    "^":operator.xor,#Potencia
+    "^":operator.pow,#Potencia
+    "sen":math.sin,
+    "sin":math.sin,
+    "cos":math.cos,
+    "tan":math.tan,
+    "cot":math.atan,
+    "sec":math.acos,
+    "csc":math.asin,
+    "log":math.log10,
+    "ln":math.log,
+    "aln":math.exp,  
 }
 
 def OperacionPostfix(P): # Operaciones posfix
@@ -37,17 +50,32 @@ def OperacionPostfix(P): # Operaciones posfix
     Stack = []
     i = 0
     while P[i]!=")":
-        if P[i] not in operators:
-            Stack.append(int(P[i]))
-        elif P[i] in operators:
+        if P[i] in operators:
             B = Stack.pop()
             A = Stack.pop()
             C = ops[P[i]](A,B)
             Stack.append(C)
+        elif P[i] in fn:
+            if P[i] in ["alog"]:
+                A = Stack.pop()
+                B = math.pow(10,A)
+                Stack.append(B)
+            else:
+                A = Stack.pop()
+                B = ops[P[i]](A)
+                Stack.append(B)
+        elif P[i] not in operators:
+            Stack.append(float(P[i]))
         else:
             print("Invalid output, exiting")
             break
         i = i+1
+    if len(Stack)>1: # Numeros separados sin signo se multiplican
+        for i in range(0,len(Stack)-1):
+            a = Stack.pop()
+            b = Stack.pop()
+            c = a * b
+            Stack.append(c)
     return (Stack.pop())
 
 def Infix():
@@ -60,9 +88,13 @@ def Priority(Valor):
         return 1
     elif Valor in ["*","/"]:
         return 2
-    elif Valor in ["^"]:
+    elif Valor in ["sen","cos","tan","sec","csc","cot","sin","ln","log","aln","alog"]:
         return 3
-    elif Valor in ["(",")"]:
+    elif Valor in ["^"]:
+        return 4
+    elif Valor in ["("]:
+        return 0
+    else:
         return -1
 
 
@@ -73,15 +105,17 @@ def InfixtoPostfix(Infix):
     Infix.append(")")
     Postfix=[]
     Ops_Stack=[]
-    for i in range(0,int(len(Infix))): # Operador
-        if Infix[i] in operators[0:5]:
-            for k in range(int(len(Ops_Stack))-1,-1,-1):
+    for i in range(0,int(len(Infix))): 
+        if Infix[i] in operators:# Operador
+            for k in range(int(len(Ops_Stack))-1,-1,-1):#Saca del stack
                 if Priority(Infix[i]) <= Priority(Ops_Stack[k]): 
                     A = Ops_Stack.pop()
                     Postfix.append(A)
-                    break
+                    continue
                 else:
                     break
+            Ops_Stack.append((Infix[i]))
+        elif Infix[i] in fn:
             Ops_Stack.append((Infix[i]))
         elif Infix[i] == "(": # (
             Ops_Stack.append((Infix[i]))
@@ -101,7 +135,7 @@ def Prio(lista):
     lista = list(lista)
     for i in range(0,int(len(lista))):
         if lista[i] in operators:
-            print (lista[i], " = ", (ceil(int((operators.index(lista[i]))+1)/2)))
+            print (lista[i], " = ", (math.ceil(int((operators.index(lista[i]))+1)/2)))
             # return operators.index(lista[i])
         else:
             print("",end="")
@@ -116,14 +150,25 @@ def Prio(lista):
 a = Infix()
 print ("Infix: ", a)
 
-P = InfixtoPostfix(a)
+p = InfixtoPostfix(a)
 print ("Prioridad: ")
 Prioridad = Prio(a)
-print ("Posfix: ", P)
+print ("Posfix: ", p)
 
 #P = ["5","6","2","+","*","12","4","/","-"]
 print ("Prioridad: ")
-Prioridad = Prio(P)
+Prioridad = Prio(p)
 
-Resultado = OperacionPostfix(P)
+Resultado = OperacionPostfix(p)
 print ("Resultado: ", Resultado)
+
+# 1 / ( x + ( 1 / ( x + ( 1 / ( x + ( 1 / x ) ) ) ) ) )
+
+#Prio
+"""
++-
+*/
+Functions
+^
+()
+"""
