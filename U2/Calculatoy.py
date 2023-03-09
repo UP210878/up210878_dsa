@@ -1,6 +1,7 @@
 import math
 import operator
-#import tkinter
+# import tkinter as tk
+
 
 # Make a calculator, buttons to display.
 # 9 = Maneja parentesis, potencia, multiplicacion, division, suma, resta
@@ -21,10 +22,21 @@ import operator
 #operacion = str(input("Ingrese la operacion"))
 
 operators = ["+","-","*","/","^"] #Operadores
-fn = ["sen", "cos", "tan", "cot", "sec", "csc","log","ln","aln","sin","alog"]
+fnTrig = ["sen","sin", "cos", "tan",] 
+afnTrig = ["cot", "sec", "csc","asin","atan","acos"]
+fnLog = ["log","ln","aln","sin","alog"]
 buttons=["1","2","3","4","5","6","7","8","9","+","-","*","/","^","sen","cos","tan","cot","sec","csc","(",")"]
 #parenthesis_start = ['(','[','{',]
 #parenthesis_finish = [')',']','}'] # Parentesis
+
+calculation = ""
+
+
+
+
+
+
+
 
 ops = {
     "+": operator.add,#Funcion suma
@@ -37,8 +49,11 @@ ops = {
     "cos":math.cos,
     "tan":math.tan,
     "cot":math.atan,
+    "atan":math.atan,
     "sec":math.acos,
+    "acos":math.acos,
     "csc":math.asin,
+    "asin":math.asin,
     "log":math.log10,
     "ln":math.log,
     "aln":math.exp,  
@@ -50,25 +65,38 @@ def OperacionPostfix(P): # Operaciones posfix
     Stack = []
     i = 0
     while P[i]!=")":
-        if P[i] in operators:
-            B = Stack.pop()
-            A = Stack.pop()
-            C = ops[P[i]](A,B)
-            Stack.append(C)
-        elif P[i] in fn:
-            if P[i] in ["alog"]:
+        try:
+            if P[i] in operators:
+                B = Stack.pop()
                 A = Stack.pop()
-                B = math.pow(10,A)
+                C = ops[P[i]](A,B)
+                Stack.append(C)
+            elif P[i] in fnTrig:
+                A = math.radians(Stack.pop())
+                B = round(ops[P[i]](A),10)
                 Stack.append(B)
+            elif P[i] in afnTrig:
+                A = (Stack.pop())
+                B = round(ops[P[i]](A),10)
+                B = round(math.degrees(B),10)
+                Stack.append(B)
+            elif P[i] in fnLog:
+                if P[i] in ["alog"]:
+                    A = Stack.pop()
+                    B = math.pow(10,A)
+                    Stack.append(B)
+                else:
+                    A = Stack.pop()
+                    B = ops[P[i]](A)
+                    Stack.append(B)
+            elif P[i] not in operators:
+                Stack.append(float(P[i]))
             else:
-                A = Stack.pop()
-                B = ops[P[i]](A)
-                Stack.append(B)
-        elif P[i] not in operators:
-            Stack.append(float(P[i]))
-        else:
-            print("Invalid output, exiting")
-            break
+                print("Invalid output, exiting")
+                break
+        except ValueError:
+            print ("MathError")
+            return
         i = i+1
     if len(Stack)>1: # Numeros separados sin signo se multiplican
         for i in range(0,len(Stack)-1):
@@ -76,12 +104,14 @@ def OperacionPostfix(P): # Operaciones posfix
             b = Stack.pop()
             c = a * b
             Stack.append(c)
+            
     return (Stack.pop())
 
 def Infix():
     operacion = str(input("Ingrese la operacion con espacios entre cada numero/simbolo: "))
     a = operacion.split()
     return a
+
 
 def Priority(Valor):
     if Valor in ["+","-"]:
@@ -115,7 +145,9 @@ def InfixtoPostfix(Infix):
                 else:
                     break
             Ops_Stack.append((Infix[i]))
-        elif Infix[i] in fn:
+        elif Infix[i] in fnLog:
+            Ops_Stack.append((Infix[i]))
+        elif Infix[i] in fnTrig or Infix[i] in afnTrig:
             Ops_Stack.append((Infix[i]))
         elif Infix[i] == "(": # (
             Ops_Stack.append((Infix[i]))
