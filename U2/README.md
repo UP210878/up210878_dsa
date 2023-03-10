@@ -28,3 +28,23 @@ TODO:<br>
 <img src=../Images/C2_1.PNG height=300> <img src=../Images/C2_2.PNG height=300><br><br>
 <h3><b># 3</b><h3>
 <img src=../Images/C3_1.PNG height=300> <img src=../Images/C3_2.PNG height=300><br><br>
+
+<b>NEW VERSION</b>
+
+<h3><b># 4</b><h3>
+<img src=../Images/C4_1.PNG height=300> <img src=../Images/C4_2.PNG height=300><br><br>
+
+<h3><b># 5</b><h3>
+<img src=../Images/C5_1.PNG height=300> <img src=../Images/C5_2.PNG height=300><br><br>
+
+<h3><b># 6</b><h3>
+<img src=../Images/C6_1.PNG height=300> <img src=../Images/C6_2.PNG height=300><br><br>
+
+<h3><b># 7</b><h3>
+<img src=../Images/C7_1.PNG height=300> <img src=../Images/C7_2.PNG height=300><br><br>
+
+<h3><b># 8</b><h3>
+<img src=../Images/C8_1.PNG height=300> <img src=../Images/C8_2.PNG height=300><br><br>
+
+<h3><b># 9</b><h3>
+<img src=../Images/C9_1.PNG height=300> <img src=../Images/C9_2.PNG height=300><br><br>

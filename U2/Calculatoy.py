@@ -119,9 +119,9 @@ def Priority(Valor):
     elif Valor in ["*","/"]:
         return 2
     elif Valor in ["sen","cos","tan","sec","csc","cot","sin","ln","log","aln","alog"]:
-        return 3
-    elif Valor in ["^"]:
         return 4
+    elif Valor in ["^"]:
+        return 3
     elif Valor in ["("]:
         return 0
     else:
