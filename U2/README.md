@@ -22,8 +22,8 @@ TODO:<br>
 <br><br>
 <h2>TESTS</h2>
 <h3><b># 1</b><h3>
-<img src=../Images/C1.png height=300 style="display: inline; margin: 0 auto"> <img src=../Images/C2.png height=300 style="display: inline; margin: 0 auto"><br><br>
+<img src=../Images/C1.PNG height=300 style="display: inline; margin: 0 auto"> <img src=../Images/C2.PNG height=300 style="display: inline; margin: 0 auto"><br><br>
 <h3><b># 2</b><h3>
-<img src=../Images/C2_1.png height=300> <img src=../Images/C2_2.png height=300><br><br>
+<img src=../Images/C2_1.PNG height=300> <img src=../Images/C2_2.PNG height=300><br><br>
 <h3><b># 3</b><h3>
-<img src=../Images/C3_1.png height=300> <img src=../Images/C3_2.png height=300><br><br>
+<img src=../Images/C3_1.PNG height=300> <img src=../Images/C3_2.PNG height=300><br><br>
