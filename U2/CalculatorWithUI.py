@@ -2,25 +2,6 @@ import math
 import operator
 import tkinter as tk
 
-
-# Make a calculator, buttons to display.
-# 9 = Maneja parentesis, potencia, multiplicacion, division, suma, resta
-# 10 = Funciones (log,ln, sen, cos, acos...)
-#Infix = 5 * ( 6 + 2 ) - 12 / 4
-#Posfix = 5 6 2 + * 12 4 / -
-# = 6 2 + = 8
-# = 5 8 * = 40
-# = 12 4 / = 3
-# = 40 3 - = 37
-#Posfix agarra dos posiciones antes del operador (Ej. 6 2 +)
-# Posfix a valor
-# Centinala = finalizacion del problema
-#Scan de todo
-    # Si es operando(Numero), enviar a la pila
-    # Si es operator (elif): B = quita de Stack, A+ pop from stack, C = A operador B. Push(C) al stack
-
-#operacion = str(input("Ingrese la operacion"))
-
 operators = ["+","-","*","/","^"] #Operadores
 fnTrig = ["sen","sin", "cos", "tan",] 
 afnTrig = ["cot", "sec", "csc","asin","atan","acos"]
